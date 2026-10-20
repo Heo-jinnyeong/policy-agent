@@ -1,0 +1,10 @@
+.env
+.venv/
+session.db
+__pycache__/
+*.log
+data/chroma/
+data/policies/academic/*
+data/policies/corporate/*
+!data/policies/academic/.gitkeep
+!data/policies/corporate/.gitkeep

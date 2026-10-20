@@ -1,0 +1,12 @@
+[
+  {"question":"부전공 포기 신청서는 어디에 내나요?","domain":"academic","expected_article":"제1조","expected_status":"eligible","expected_documents":["부전공 포기 신청서"],"expected_procedure":["학사팀에 제출"],"expected_follow_up":false},
+  {"question":"졸업하려는데 부전공 포기 후 주전공 요건도 확인해야 하나요?","domain":"academic","expected_article":"제2조","expected_status":"conditional","expected_procedure":["졸업 사정"],"expected_follow_up":false},
+  {"question":"이번 학기 졸업인데 부전공 포기 기한이 있나요?","domain":"academic","expected_article":"제1조","expected_status":"conditional","expected_follow_up":false},
+  {"question":"부전공 포기 후 교과목은 어떻게 처리되나요?","domain":"academic","expected_article":"제4조","expected_status":"need_more_information","expected_follow_up":true},
+  {"question":"휴학 신청에 필요한 서류는 무엇인가요?","domain":"academic","expected_article":"제3조","expected_status":"eligible","expected_documents":["휴학 신청서"],"expected_procedure":["학사팀에 제출"],"expected_follow_up":false},
+  {"question":"졸업 사정이 시작됐는데 휴학할 수 있나요?","domain":"academic","expected_article":"제3조","expected_status":"need_more_information","expected_follow_up":true},
+  {"question":"장학금 지급액은 얼마인가요?","domain":"academic","expected_article":null,"expected_status":"need_more_information","expected_follow_up":false},
+  {"question":"개인 차량 출장 시 주차비를 받을 수 있나요?","domain":"corporate","expected_article":"제1조","expected_status":"conditional","expected_documents":["주차 영수증"],"expected_follow_up":false},
+  {"question":"부산 출장 식비 정산에 어떤 증빙이 필요한가요?","domain":"corporate","expected_article":"제2조","expected_status":"conditional","expected_documents":["영수증"],"expected_follow_up":false},
+  {"question":"부전공 포기 규정의 최신 시행일은 언제인가요?","domain":"academic","expected_article":"제1조","expected_status":"need_more_information","expected_follow_up":false}
+]
