@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Policy Agent 발표자료</title>
+<style>
+:root{--paper:#f8f8f4;--ink:#202c30;--muted:#627075;--line:#cbd2d0;--deep:#19363c;--accent:#367c78;--light:#c0d9d2}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{overflow:hidden;background:#14282d;color:var(--ink);font-family:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",Arial,sans-serif}button{font:inherit}
+#stage{position:absolute;top:50%;left:50%;width:1600px;height:900px;overflow:hidden;background:var(--paper);transform:translate(-50%,-50%) scale(var(--deck-scale,1));transform-origin:center;box-shadow:0 25px 80px #0005}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:66px 92px 82px;background:var(--paper)}.slide.active{display:flex}.slide::before{content:"";position:absolute;inset:0 0 auto;height:8px;background:var(--accent)}.slide.dark{background:var(--deep);color:#f6f7f1}.slide.dark::before{background:var(--light)}
+.masthead{display:flex;justify-content:space-between;align-items:center;min-height:30px;margin-bottom:38px;color:var(--accent);font-size:18px;font-weight:700;letter-spacing:.11em}.masthead span:last-child{color:var(--muted);font-weight:400;letter-spacing:0}.dark .masthead{color:var(--light)}.dark .masthead span:last-child{color:#b9cbc9}
+h1,h2,h3,p{margin:0}h1{font-size:91px;line-height:1.12;letter-spacing:-.065em}h2{margin:0 0 17px;font-size:55px;line-height:1.22;letter-spacing:-.055em}h3{font-size:27px;line-height:1.38;letter-spacing:-.035em}p{font-size:24px;line-height:1.52}.lead{max-width:1330px;color:var(--muted);font-size:27px;line-height:1.48}.dark .lead{color:#c9d8d6}.content{display:flex;flex:1;flex-direction:column;min-height:0}.cap{margin-top:auto;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:18px;line-height:1.45}.dark .cap{border-color:#547078;color:#c0cfcc}
+.label{color:var(--accent);font-size:17px;font-weight:750;letter-spacing:.13em}.definition{display:grid;grid-template-columns:240px 1fr;gap:36px;align-items:start;margin:45px 0 43px;padding:26px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line)}.definition p{font-size:34px;font-weight:650;line-height:1.43;letter-spacing:-.04em}.definition .label{padding-top:10px}
+.columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:68px;margin-top:39px}.columns.three{grid-template-columns:repeat(3,minmax(0,1fr));gap:42px}.col{border-top:2px solid var(--ink);padding-top:21px}.col h3{margin-bottom:13px}.col p{color:var(--muted);font-size:22px}.col .label{display:block;margin-bottom:13px}.col+.col.sep{border-left:1px solid var(--line);padding-left:42px;border-top:0}
+.rows{margin-top:35px;border-top:2px solid var(--ink)}.row{display:grid;grid-template-columns:245px 1fr;gap:32px;align-items:start;padding:19px 0;border-bottom:1px solid var(--line)}.row b{font-size:24px;font-weight:700}.row span{font-size:23px;line-height:1.43;color:var(--muted)}.rows.compact .row{padding:13px 0}.rows.compact .row b{font-size:22px}.rows.compact .row span{font-size:21px}
+.sequence{display:grid;grid-template-columns:repeat(4,1fr);gap:29px;margin-top:49px}.sequence.three{grid-template-columns:repeat(3,1fr)}.sequence>div{border-top:2px solid var(--ink);padding-top:19px}.sequence .n{display:block;margin-bottom:27px;color:var(--accent);font-size:20px;font-weight:750}.sequence h3{margin-bottom:12px}.sequence p{color:var(--muted);font-size:21px}.sequence small{display:block;margin-top:15px;color:var(--accent);font-size:18px;line-height:1.4}
+.table{width:100%;margin-top:34px;border-collapse:collapse;text-align:left}.table th{border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);padding:14px 10px;color:var(--accent);font-size:19px}.table td{border-bottom:1px solid var(--line);padding:14px 10px;font-size:21px;line-height:1.35}.table td:first-child{font-weight:700}.table.small td{font-size:19px;padding:11px 10px}.table.small th{padding:11px 10px}
+.architecture{margin-top:25px}.arch-line{display:grid;grid-template-columns:205px 1fr;gap:25px;padding:23px 0;border-top:1px solid var(--line)}.arch-line:last-child{border-bottom:1px solid var(--line)}.arch-line .kind{color:var(--accent);font-size:20px;font-weight:750}.arch-chain{display:flex;align-items:flex-start;gap:0}.arch-node{flex:1;min-width:0}.arch-node strong{display:block;font-size:24px;line-height:1.3}.arch-node small{display:block;margin-top:10px;color:var(--muted);font-size:18px;line-height:1.35}.arch-arrow{width:39px;flex:none;padding-top:1px;color:var(--accent);font-size:27px}.under-note{margin-top:30px;color:var(--muted);font-size:21px;line-height:1.45}
+.code-lines{margin-top:30px;border-top:2px solid var(--ink)}.code-line{display:grid;grid-template-columns:188px 1fr;gap:25px;padding:16px 0;border-bottom:1px solid var(--line);font-size:19px}.code-line b{font-size:21px}.code-line code{font:20px/1.4 "SFMono-Regular",Consolas,monospace;word-break:break-word}.code-line span{color:var(--muted);font-size:19px}.code-note{margin-top:25px;color:var(--muted);font-size:21px}
+.toc{margin-top:25px}.toc a{display:grid;grid-template-columns:85px 390px 1fr;gap:20px;align-items:center;min-height:80px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}.toc a:first-child{border-top:2px solid var(--ink)}.toc a:hover,.toc a:focus-visible{color:var(--accent)}.toc .num{color:var(--accent);font-size:22px;font-weight:750}.toc strong{font-size:30px;letter-spacing:-.04em}.toc span:last-child{color:var(--muted);font-size:21px}
+.cover .content{justify-content:center}.cover .eyebrow{margin-bottom:25px;color:var(--light);font-size:20px;font-weight:700;letter-spacing:.1em}.cover h1{font-size:105px}.cover .line{width:105px;height:4px;margin:38px 0;background:var(--light)}.cover .intro{font-size:43px;font-weight:600;line-height:1.45;letter-spacing:-.045em}.cover .meta{margin-top:37px;color:#c4d5d1;font-size:22px}.closing .content{justify-content:center}.closing h1{font-size:74px;line-height:1.28}.closing p{margin-top:45px;color:#c8d8d4;font-size:28px}
+.fact{display:flex;gap:36px;align-items:baseline;margin-top:47px;border-top:2px solid var(--ink);padding-top:25px}.fact strong{font-size:77px;letter-spacing:-.07em}.fact span{font-size:23px;color:var(--muted)}
+.diagram{display:block;width:100%;height:auto;margin:24px 0 0}.diagram .node{fill:#fbfcf8;stroke:#8ba7a1;stroke-width:1.8}.diagram .storage{fill:#edf4f0;stroke:#6e9991;stroke-width:1.8}.diagram .step{fill:var(--ink);font-size:22px;font-weight:700}.diagram .detail{fill:var(--muted);font-size:16px}.diagram .path{fill:none;stroke:#6c938c;stroke-width:2.2;marker-end:url(#arrow)}.diagram .optional{fill:none;stroke:#94aaa5;stroke-width:1.7;stroke-dasharray:7 6;marker-end:url(#arrow)}.diagram .caption{fill:var(--accent);font-size:17px;font-weight:700}.diagram .tiny{fill:var(--muted);font-size:15px}.diagram .retry{fill:none;stroke:#7b9891;stroke-width:1.7;marker-end:url(#arrow)}
+.screen-layout{display:grid;grid-template-columns:500px minmax(0,1fr);gap:38px;align-items:start;margin-top:32px}.screen-notes{border-top:2px solid var(--ink)}.screen-notes div{padding:17px 0;border-bottom:1px solid var(--line)}.screen-notes b{display:block;margin-bottom:6px;font-size:20px}.screen-notes p{color:var(--muted);font-size:20px;line-height:1.4}.screen-figure{margin:0}.screen-figure img{display:block;width:100%;height:auto;border:1px solid var(--line)}.screen-figure figcaption{margin-top:10px;color:var(--muted);font-size:17px;line-height:1.4}.form-steps{margin-top:20px;gap:22px}.form-steps>div{padding-top:12px}.form-steps .n{margin-bottom:6px;font-size:17px}.form-steps h3{margin-bottom:5px;font-size:24px}.form-steps p{font-size:18px;line-height:1.4}.form-shot{width:1120px;max-width:100%;margin:24px 0 0}.model-shot{width:1080px;max-width:100%;margin-top:28px}.model-rows{margin-top:24px}.model-rows .row{padding:13px 0}.model-rows .row b{font-size:21px}.model-rows .row span{font-size:20px}
+.appendix-title .content{justify-content:center}.appendix-title h1{font-size:87px}.appendix-title p{margin-top:34px;color:#c8d8d4;font-size:31px;line-height:1.45}.case-quote{margin-top:28px;padding:19px 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);font-size:27px;font-weight:650;line-height:1.45}.case-grid{display:grid;grid-template-columns:220px 1fr;gap:0;margin-top:29px;border-top:1px solid var(--line)}.case-grid b,.case-grid p{padding:15px 0;border-bottom:1px solid var(--line)}.case-grid b{font-size:20px;color:var(--accent)}.case-grid p{font-size:21px;line-height:1.43}.case-grid code{font:18px/1.35 "SFMono-Regular",Consolas,monospace}.case-result{margin-top:24px;color:var(--muted);font-size:21px;line-height:1.4}
+#hud{position:absolute;right:0;bottom:0;left:0;z-index:5;display:flex;align-items:center;gap:16px;height:51px;padding:0 27px;background:rgba(248,248,244,.97);color:#5d6d70;font-size:16px}#hud.dark{background:rgba(25,54,60,.97);color:#d1ddda}#hud .brand{font-weight:800}#hud .spacer{flex:1}#hud button{height:33px;min-width:33px;padding:0 8px;border:1px solid currentColor;border-radius:50%;background:transparent;color:inherit;cursor:pointer}#hud button:disabled{opacity:.35;cursor:default}#hud #toc-button{border-radius:3px}#progress{position:absolute;right:auto;bottom:50px;left:0;z-index:6;height:3px;width:0;background:var(--accent);transition:width .2s}
+@media print{@page{size:16in 9in;margin:0}html,body{width:auto;height:auto;overflow:visible;background:white}#stage{position:static;width:1600px;height:auto;overflow:visible;transform:none!important;box-shadow:none}.slide,.slide.active{position:relative;display:flex!important;width:1600px;height:900px;break-after:page;print-color-adjust:exact;-webkit-print-color-adjust:exact}#hud,#progress{display:none}}
+</style>
+</head>
+<body><div id="stage">
+
+<section class="slide dark cover" aria-label="슬라이드 1: Policy Agent">
+  <div class="masthead"><span>POLICY AGENT · CAPSTONE PROJECT</span><span>서비스 구조와 구현</span></div>
+  <div class="content"><div><div class="eyebrow">규정 문서 검색과 신청서 초안 작성 서비스</div><h1>Policy Agent</h1><div class="line"></div><p class="intro">등록된 규정에서 근거 조항을 찾고<br>그 근거로 답변과 신청서 초안을 만든다.</p><p class="meta">학사 규정 · 사내 규정 / Ollama · OpenAI 선택</p></div><p class="cap">현재 저장소의 구현을 기준으로 작성했다. 답변에 사용할 근거는 등록된 문서에 따라 달라진다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 2: 발표 구성">
+  <div class="masthead"><span>CONTENTS</span><span>발표 순서</span></div><h2>발표 구성</h2><p class="lead">서비스의 역할을 정의한 뒤, 문서 저장 방식과 질문 처리 과정을 설명한다.</p>
+  <div class="content"><nav class="toc" aria-label="발표 목차"><a href="#3"><span class="num">01</span><strong>서비스와 데이터</strong><span>제공 기능, 문서 종류, RAG</span></a><a href="#6"><span class="num">02</span><strong>시스템 구조</strong><span>아키텍처, 실행 그래프, 색인</span></a><a href="#12"><span class="num">03</span><strong>답변 생성</strong><span>질문 분류, 검색, 근거 검증</span></a><a href="#16"><span class="num">04</span><strong>신청서와 운영</strong><span>양식 처리, 모델, 실행 방법</span></a><a href="#19"><span class="num">05</span><strong>평가와 검증</strong><span>실제 학칙 10개 질문의 측정 결과</span></a><a href="#21"><span class="num">A</span><strong>Appendix</strong><span>문제 상황, 원인, 해결 과정</span></a></nav><p class="cap">목차를 누르거나 방향키와 하단 버튼으로 슬라이드를 이동할 수 있다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 3: 서비스 정의">
+  <div class="masthead"><span>01 · SERVICE</span><span>서비스의 입력과 출력</span></div><h2>서비스 정의</h2><p class="lead">사용자의 질문을 등록된 문서와 연결해 답변하고, 필요한 경우 신청서 작성까지 이어준다.</p>
+  <div class="content"><div class="definition"><span class="label">서비스 정의</span><p>질문과 관련된 규정 조항을 검색하고, 조항의 원문과 출처를 확인한 답변을 제공한다.</p></div><div class="columns three"><div class="col"><span class="label">입력</span><h3>규정 질문</h3><p>학사 또는 사내 규정 분야를 고르고 질문한다.</p></div><div class="col"><span class="label">기본 출력</span><h3>답변과 출처</h3><p>확인된 내용과 문서명·조항·원문 발췌를 보여준다.</p></div><div class="col"><span class="label">추가 출력</span><h3>신청서 초안</h3><p>등록된 빈 양식이 있으면 입력할 정보를 받아 초안을 내려받는다.</p></div></div><p class="cap">원문에서 확인하지 못한 서류나 절차는 확정해서 안내하지 않는다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 4: 데이터 구성">
+  <div class="masthead"><span>01 · DATA</span><span>서로 다른 파일의 역할</span></div><h2>데이터 구성</h2><p class="lead">규정은 답변의 근거이고, 신청서는 사용자가 작성할 빈 양식이다.</p>
+  <div class="content"><div class="rows"><div class="row"><b>규정 파일</b><span>data/policies의 학사·사내 폴더에서 PDF·TXT·Markdown을 조항 중심으로 색인한다.</span></div><div class="row"><b>신청서 양식</b><span>data/forms의 학사·사내 폴더에서 HWP·HWPX·DOCX를 따로 찾는다. 벡터 색인에는 넣지 않는다.</span></div><div class="row"><b>대화 기록</b><span>질문과 답변을 SQLite에 저장하고, 후속 질문을 해석할 때 직전 문맥을 사용한다.</span></div><div class="row"><b>현재 작업 공간</b><span>학사 PDF 3개와 등록 양식 14개가 있다. 활성 Chroma에는 학사 PDF 1개의 조항만 색인돼 있다.</span></div></div><div class="columns" style="margin-top:34px"><div class="col"><h3>규정이 바뀐 경우</h3><p>현재 적용할 파일을 넣고 해당 분야 색인을 초기화한 뒤 다시 등록한다.</p></div><div class="col"><h3>양식을 추가한 경우</h3><p>업로드 즉시 목록에서 찾을 수 있으며 규정 색인 명령은 필요 없다.</p></div></div><p class="cap">양식 폴더의 PDF 4개는 현재 신청서 목록에 나타나지 않는다. 스캔 이미지 PDF는 OCR 없이 본문을 추출할 수 없다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 5: RAG와 규정 기반 답변">
+  <div class="masthead"><span>01 · RAG</span><span>검색 기반 답변의 개념</span></div><h2>RAG와 규정 기반 답변</h2><p class="lead">모델이 기억하는 일반 지식에만 의존하지 않고, 등록된 규정의 내용을 먼저 찾는다.</p>
+  <div class="content"><div class="definition"><span class="label">RAG 정의</span><p>질문과 관련된 문서 조각을 검색한 뒤, 그 내용을 참고 자료로 넣어 답변을 생성하는 방식이다.</p></div><div class="sequence three"><div><span class="n">01</span><h3>문서 등록</h3><p>본문을 추출하고 조항으로 나눠 Chroma에 저장한다.</p></div><div><span class="n">02</span><h3>관련 조항 검색</h3><p>질문과 가까운 조항을 분야 안에서 찾는다.</p></div><div><span class="n">03</span><h3>답변 생성</h3><p>선택한 LLM이 검색 결과를 읽고 근거가 있는 내용만 정리한다.</p></div></div><p class="cap">답변의 범위는 등록된 문서와 검색된 조항에 의해 제한된다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 6: 전체 아키텍처">
+  <div class="masthead"><span>02 · ARCHITECTURE</span><span>문서 등록과 질문 처리</span></div><h2>전체 아키텍처</h2><p class="lead">문서는 미리 색인하고, 사용자의 질문은 만들어진 색인과 양식 목록을 조회한다.</p>
+  <div class="content"><svg class="diagram" viewBox="0 0 1416 455" role="img" aria-label="규정 파일에서 LangChain 로더와 임베딩을 거쳐 Chroma에 저장한다. Vue 채팅 요청은 8600 프록시, 8100 API, LangGraph, MCP 서버를 거쳐 Chroma를 검색한다. LangGraph는 SQLite와 선택적 LangSmith를 사용한다.">
+    <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#6c938c" stroke-width="1.7"/></marker></defs>
+    <text class="caption" x="20" y="28">문서 등록</text>
+    <path class="path" d="M260 85 H350"/><path class="path" d="M680 85 H1080"/>
+    <rect class="node" x="20" y="50" width="240" height="70" rx="4"/><text class="step" x="40" y="81">규정 파일</text><text class="detail" x="40" y="106">PDF · TXT · MD</text>
+    <rect class="node" x="350" y="50" width="330" height="70" rx="4"/><text class="step" x="370" y="81">LangChain 로더·청커·임베딩</text><text class="detail" x="370" y="106">본문 추출, 조항 분할, 벡터 생성</text>
+    <rect class="storage" x="1080" y="50" width="270" height="70" rx="4"/><text class="step" x="1100" y="81">Chroma</text><text class="detail" x="1100" y="106">원문·출처·벡터 저장</text>
+    <text class="caption" x="20" y="193">질문 처리</text>
+    <path class="path" d="M200 252 H230"/><path class="path" d="M420 252 H450"/><path class="path" d="M640 252 H670"/><path class="path" d="M860 252 H890"/><path class="path" d="M1080 252 H1210 V121"/>
+    <rect class="node" x="20" y="215" width="180" height="74" rx="4"/><text class="step" x="40" y="246">Vue 채팅</text><text class="detail" x="40" y="272">질문과 답변 화면</text>
+    <rect class="node" x="230" y="215" width="190" height="74" rx="4"/><text class="step" x="250" y="246">FastAPI 프록시</text><text class="detail" x="250" y="272">:8600 · SSE</text>
+    <rect class="node" x="450" y="215" width="190" height="74" rx="4"/><text class="step" x="470" y="246">FastAPI</text><text class="detail" x="470" y="272">:8100 · API</text>
+    <rect class="node" x="670" y="215" width="190" height="74" rx="4"/><text class="step" x="690" y="246">LangGraph</text><text class="detail" x="690" y="272">분류·검색·검증</text>
+    <rect class="node" x="890" y="215" width="190" height="74" rx="4"/><text class="step" x="910" y="246">MCP stdio 서버</text><text class="detail" x="910" y="272">규정·양식 검색 도구</text>
+    <path class="path" d="M765 289 V357"/><path class="optional" d="M835 289 V326 H1040 V357"/>
+    <rect class="storage" x="670" y="357" width="190" height="66" rx="4"/><text class="step" x="690" y="386">SQLite 세션</text><text class="detail" x="690" y="411">후속 질문 문맥</text>
+    <rect class="node" x="945" y="357" width="190" height="66" rx="4"/><text class="step" x="965" y="386">LangSmith</text><text class="detail" x="965" y="411">선택적 실행 추적</text>
+  </svg><p class="cap">architecture.md의 연결 구조를 반영했다. 양식 파일은 data/forms/에 따로 저장한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 7: LangGraph 실행 그래프">
+  <div class="masthead"><span>02 · LANGGRAPH</span><span>질문 처리의 분기와 재시도</span></div><h2>LangGraph 실행 그래프</h2><p class="lead">Router가 일반 대화와 규정 질문을 나누고, 규정 질문은 검색·분석·검증을 거친다.</p>
+  <div class="content"><svg class="diagram" viewBox="0 0 1416 455" role="img" aria-label="Router에서 일반 질문은 간단 응답으로 종료한다. 규정 질문은 사용자 맥락, 계획, Research, 근거 확인, Policy Analysis, 추가 정보 확인, Writing, Validator, 양식 조회, Finalize 순으로 이동한다. 근거 부족 시 Research, 검증 실패 시 Analysis로 제한된 횟수만 되돌아간다.">
+    <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#6c938c" stroke-width="1.7"/></marker></defs>
+    <text class="caption" x="20" y="28">규정 질문</text>
+    <path class="path" d="M180 105 H240"/><path class="path" d="M405 105 H465"/><path class="path" d="M630 105 H690"/><path class="path" d="M855 105 H915"/><path class="path" d="M1080 105 H1140"/>
+    <rect class="node" x="15" y="70" width="165" height="70" rx="4"/><text class="step" x="35" y="111">Router</text>
+    <rect class="node" x="240" y="70" width="165" height="70" rx="4"/><text class="step" x="260" y="111">사용자 맥락</text>
+    <rect class="node" x="465" y="70" width="165" height="70" rx="4"/><text class="step" x="485" y="111">계획</text>
+    <rect class="node" x="690" y="70" width="165" height="70" rx="4"/><text class="step" x="710" y="111">Research</text>
+    <rect class="node" x="915" y="70" width="165" height="70" rx="4"/><text class="step" x="935" y="111">근거 확인</text>
+    <rect class="node" x="1140" y="70" width="235" height="70" rx="4"/><text class="step" x="1160" y="111">Policy Analysis</text>
+    <path class="retry" d="M997 70 V48 H772 V70"/><text class="tiny" x="835" y="39">검색 0건 · 최대 1회</text>
+    <path class="retry" d="M1257 70 V20 H798 V70"/><text class="tiny" x="1091" y="17">판단 항목 없음</text>
+    <path class="path" d="M1257 140 V262"/>
+    <rect class="node" x="1140" y="262" width="235" height="70" rx="4"/><text class="step" x="1160" y="303">추가 정보 확인</text>
+    <rect class="node" x="915" y="262" width="165" height="70" rx="4"/><text class="step" x="935" y="303">Writing</text>
+    <rect class="node" x="690" y="262" width="165" height="70" rx="4"/><text class="step" x="710" y="303">Validator</text>
+    <rect class="node" x="465" y="262" width="165" height="70" rx="4"/><text class="step" x="485" y="303">양식 조회</text>
+    <rect class="storage" x="240" y="262" width="165" height="70" rx="4"/><text class="step" x="260" y="303">Finalize</text>
+    <path class="path" d="M1140 297 H1080"/><path class="path" d="M915 297 H855"/><path class="path" d="M690 297 H630"/><path class="path" d="M465 297 H405"/>
+    <path class="retry" d="M772 332 V401 H1385 V105 H1375"/><text class="tiny" x="888" y="392">검증 실패 → 분석 재시도 · 최대 1회</text>
+    <path class="path" d="M97 140 V262"/><rect class="node" x="15" y="262" width="165" height="70" rx="4"/><text class="step" x="35" y="303">간단 응답</text><text class="tiny" x="17" y="358">일반 대화는 검색하지 않고 종료</text>
+  </svg><p class="cap">현재 코드에는 근거가 없어 규정과 무관한 질문으로 판정되면 간단 응답으로 끝나는 분기도 있다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 8: 사용 도구와 역할">
+  <div class="masthead"><span>02 · TOOLS</span><span>실제 사용한 기술</span></div><h2>사용 도구와 역할</h2><p class="lead">각 도구는 화면, 요청 처리, 규정 검색, 답변 생성 중 한 작업을 맡는다.</p>
+  <div class="content"><table class="table small"><thead><tr><th style="width:350px">도구</th><th style="width:315px">위치</th><th>역할</th></tr></thead><tbody><tr><td>Vue 3</td><td>웹 화면</td><td>질문 입력, 모델 선택, 답변과 출처 표시</td></tr><tr><td>FastAPI · Uvicorn</td><td>웹 프록시·API</td><td>채팅 요청, 스트리밍, 파일 업로드</td></tr><tr><td>LangGraph</td><td>질문 처리</td><td>분류, 검색, 분석, 검증 단계 실행</td></tr><tr><td>MCP · FastMCP</td><td>도구 연결</td><td>규정 검색과 양식 검색 기능 호출</td></tr><tr><td>Chroma · LangChain</td><td>문서 색인</td><td>조항별 임베딩 저장과 검색</td></tr><tr><td>Ollama · OpenAI</td><td>언어 모델</td><td>질문 판단과 규정 기반 답변 작성</td></tr><tr><td>SQLite · LangSmith</td><td>기록·관찰</td><td>대화 기록 저장·선택적 실행 추적</td></tr></tbody></table><p class="cap">답변용 LLM을 바꿔도 규정 색인은 기존 임베딩 모델로 유지된다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 9: 규정 색인">
+  <div class="masthead"><span>02 · INDEXING</span><span>검색 전에 수행하는 작업</span></div><h2>규정 색인</h2><p class="lead">등록할 때 본문과 출처를 정리해 두므로, 질문마다 원본 PDF 전체를 다시 읽지 않는다.</p>
+  <div class="content"><div class="sequence"><div><span class="n">01</span><h3>본문 추출</h3><p>PDF·TXT·Markdown에서 텍스트를 읽는다.</p></div><div><span class="n">02</span><h3>조항 분할</h3><p>조항 경계를 기준으로 검색할 단위를 만든다.</p></div><div><span class="n">03</span><h3>임베딩 생성</h3><p>기본 Ollama 모델로 각 조항을 숫자 벡터로 바꾼다.</p></div><div><span class="n">04</span><h3>Chroma 저장</h3><p>벡터와 함께 문서명·조항·원문을 보관한다.</p></div></div><div class="rows" style="margin-top:49px"><div class="row"><b>일반 등록</b><span><code>./.venv/bin/python3 -m scripts.ingest_policies</code></span></div><div class="row"><b>학사 규정 교체</b><span><code>./.venv/bin/python3 -m scripts.ingest_policies --reset-domain academic</code></span></div></div><p class="cap">파일 삭제만으로 과거 색인이 지워지지 않는다. 교체한 분야의 색인을 초기화해야 한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 10: 색인 대상과 출처 정보">
+  <div class="masthead"><span>02 · INDEX RULES</span><span>어떤 내용을 검색할 수 있는가</span></div><h2>색인 대상과 출처 정보</h2><p class="lead">문서를 모두 그대로 넣지 않고 검색 단위와 출처 정보를 만든 뒤 Chroma에 저장한다.</p>
+  <div class="content"><div class="rows"><div class="row"><b>분할 단위</b><span>페이지 안의 제N조 경계를 먼저 찾고, 긴 조항은 900자 안팎으로 더 나눈다.</span></div><div class="row"><b>저장 정보</b><span>문서명, 분야, 페이지, 조항, 파일 해시, 시행일을 조항과 함께 보관한다.</span></div><div class="row"><b>긴 PDF 처리</b><span>50개 이상으로 나뉜 PDF는 조항 제목이 있는 청크만 남긴다. 그 비율이 10% 미만이면 해당 파일을 색인하지 않는다.</span></div><div class="row"><b>다시 등록</b><span>같은 파일 해시와 색인 규칙은 건너뛴다. 수정한 파일은 같은 문서의 청크를 교체한다.</span></div></div><div class="columns" style="margin-top:43px"><div class="col"><h3>검색되지 않는 내용</h3><p>긴 PDF의 조항 외 부록이나 이미지 PDF의 글자는 빠질 수 있다.</p></div><div class="col"><h3>시행일의 역할</h3><p>시행일은 출처 정보로 저장하지만 최신 규정만 자동 선택하지는 않는다.</p></div></div><p class="cap">현재 학사 PDF 3개 중 1개만 활성 색인에 있다. 조항 외 내용은 필요하면 별도 TXT 또는 Markdown으로 등록한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 11: 임베딩 모델과 답변 모델">
+  <div class="masthead"><span>02 · MODELS</span><span>모델이 맡은 작업의 차이</span></div><h2>임베딩 모델과 답변 모델</h2><p class="lead">임베딩 모델은 조항을 찾고, 답변 모델은 찾은 조항을 읽어 문장을 만든다.</p>
+  <div class="content"><div class="columns" style="margin-top:57px"><div class="col"><span class="label">검색을 위한 모델</span><h3>기본 Ollama 임베딩</h3><p><strong>qwen3-embedding:0.6b</strong>로 문서와 질문을 같은 벡터 공간에 표현한다. 설정으로 Hugging Face 모델을 선택할 수도 있다.</p></div><div class="col"><span class="label">답변을 위한 모델</span><h3>Ollama 또는 OpenAI</h3><p>화면에서 선택한 모델이 검색된 조항을 분석해 답변한다. OpenAI는 서버에 API 키가 있을 때만 선택할 수 있다.</p></div></div><div class="definition" style="margin-top:50px;margin-bottom:20px"><span class="label">모델 전환 시</span><p>OpenAI로 답변해도 기본 검색은 Ollama 임베딩을 사용한다. 답변 모델 선택은 Chroma 색인을 바꾸지 않는다.</p></div><p class="cap">기본 설정에서는 OpenAI 답변을 선택해도 Ollama 서버가 검색 임베딩에 필요하다. 임베딩 모델을 바꾸면 별도 색인을 만들어야 한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 12: 질문 분류">
+  <div class="masthead"><span>03 · ROUTING</span><span>검색 전에 결정하는 일</span></div><h2>질문 분류</h2><p class="lead">질문에 규정이라는 단어가 있다는 이유만으로 검색하지 않고, 실제로 묻는 주제를 확인한다.</p>
+  <div class="content"><div class="definition"><span class="label">분류 기준</span><p>앞에 붙은 지시 문구를 제외하고, 추출한 질문이 등록된 규정 분야의 절차·조건·서류를 묻는지 판단한다.</p></div><div class="rows compact" style="margin-top:9px"><div class="row"><b>규정 질문</b><span>학사·사내 규정의 조건이나 절차를 묻는다 → 해당 분야 검색</span></div><div class="row"><b>후속 질문</b><span>앞선 규정 답변의 문맥을 이어 묻는다 → 대화 이력과 함께 검색</span></div><div class="row"><b>일반 질문</b><span>사람이나 일상 주제를 묻는다 → 규정 검색 없이 안내</span></div></div><p class="cap">명확한 표현은 규칙으로 처리하고, 애매한 질문은 빠른 LLM 분류를 사용한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 13: 규정 검색과 결과 정렬">
+  <div class="masthead"><span>03 · RETRIEVAL</span><span>관련 조항을 찾는 방법</span></div><h2>규정 검색과 결과 정렬</h2><p class="lead">벡터 검색만으로 비슷한 표현을 찾으면 주제가 다른 조항도 섞일 수 있어, 검색 결과를 다시 정렬한다.</p>
+  <div class="content"><div class="sequence three"><div><span class="n">01</span><h3>분야 제한</h3><p>선택한 학사 또는 사내 규정 안에서만 후보를 찾는다.</p></div><div><span class="n">02</span><h3>점수 보정</h3><p>벡터 유사도에 질문과 조항의 단어 겹침, 문서 제목의 일치를 반영한다.</p></div><div><span class="n">03</span><h3>후보 선별</h3><p>관련도 기준을 넘긴 조항 중 상위 결과를 답변 단계로 전달한다.</p></div></div><div class="rows" style="margin-top:70px"><div class="row"><b>현재 설정</b><span>검색 기준 점수 0.30 · 답변 그래프가 받는 상위 조항 최대 3개</span></div><div class="row"><b>검색이 약한 경우</b><span>정해진 범위에서 검색을 한 번 더 시도한 뒤 근거가 부족하면 확인 필요로 처리한다.</span></div></div><p class="cap">관련도 점수는 검색 후보를 줄이는 기준이다. 답변이 맞는지 여부는 다음 단계에서 별도로 확인한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 14: 답변 구성">
+  <div class="masthead"><span>03 · ANSWER</span><span>검색 결과를 사용자 안내로 변환</span></div><h2>답변 구성</h2><p class="lead">LLM은 찾은 조항에서 확인되는 정보를 항목별로 정리한다.</p>
+  <div class="content"><div class="screen-layout"><div class="screen-notes"><div><b>질문</b><p>“출석 인정은 어떤 경우에 받을 수 있나요?”</p></div><div><b>답변 항목</b><p>규정에서 찾은 인정 사유, 신청 기한, 담당 부서를 구분해 표시한다.</p></div><div><b>출처</b><p>답변에 사용한 문서명과 제22조의3, 378쪽을 함께 표시한다. 원문은 펼쳐 볼 수 있다.</p></div><div><b>서류 질문</b><p>제출 서류명이 근거 조항에 없으면 임의로 만들어 안내하지 않는다.</p></div></div><figure class="screen-figure"><img src="assets/policy_agent_answer_detail.png" alt="출석 인정 질문에 대한 실제 답변 화면. 인정 사유와 신청 기한, 담당 부서, 검색된 규정 출처가 보인다"><figcaption>실행 화면 · Ollama qwen3:8b 답변 결과</figcaption></figure></div><p class="cap">현재 등록·색인된 학사 PDF를 사용한 화면이다. 답변의 사실 관계는 최신 원문과 대조해야 한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 15: 근거 검증">
+  <div class="masthead"><span>03 · VERIFICATION</span><span>답변 전 확인하는 조건</span></div><h2>근거 검증</h2><p class="lead">답변 문장이 검색된 조항에 의해 뒷받침되는지 확인하고, 부족하면 확인이 필요하다고 표시한다.</p>
+  <div class="content"><div class="definition" style="margin-bottom:28px"><span class="label">검증 정의</span><p>답변 항목의 출처 ID와 인용 문구를 검색된 원문에 대조하고, 확정 판단의 근거를 다시 확인한다.</p></div><div class="columns three" style="margin-top:20px"><div class="col"><span class="label">코드 검사</span><h3>인용 원문 대조</h3><p>원문에 없는 인용과 항목을 제거한다. PDF 공백·줄바꿈 차이는 원문 위치를 찾아 보정한다.</p></div><div class="col"><span class="label">판정 검사</span><h3>단정 제한</h3><p>금지 문구 없이 “신청 불가”로 확정하지 않는다. 근거가 있는 판단은 모델 심사를 한 번 더 거친다.</p></div><div class="col"><span class="label">검증 실패</span><h3>판단 유보</h3><p>분석을 최대 한 번 다시 시도하고, 계속 실패하면 추가 확인 필요로 종료한다.</p></div></div><p class="under-note">웹 화면은 처리 단계만 먼저 보여주고, 검증 전 초안 대신 <strong>FinalAnswer</strong> 이벤트의 최종 답변과 실제로 인용된 조항만 표시한다.</p><p class="cap">원문에 문구가 있다는 검사만으로 의미 해석까지 완벽하다고 보장할 수는 없다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 16: 신청서 초안 작성">
+  <div class="masthead"><span>04 · FORMS</span><span>빈 양식에서 작성 파일까지</span></div><h2>신청서 초안 작성</h2><p class="lead">규정 답변에서 양식이 필요하면 해당 파일을 찾고, 사용자에게 입력 항목을 받아 초안을 만든다.</p>
+  <div class="content"><div class="sequence form-steps"><div><span class="n">01</span><h3>양식 등록</h3><p>HWP·HWPX·DOCX 파일을 올린다.</p></div><div><span class="n">02</span><h3>관련 양식 검색</h3><p>질문과 규정에 맞는 파일을 찾는다.</p></div><div><span class="n">03</span><h3>입력 항목 확인</h3><p>원본을 확인하고 인적사항을 입력한다.</p></div><div><span class="n">04</span><h3>초안 다운로드</h3><p>입력한 내용으로 작성 파일을 받는다.</p></div></div><figure class="screen-figure form-shot"><img src="assets/policy_agent_form_fields.png" alt="조기취업자 출석인정 신청서의 실제 초안 작성 화면. 성명, 학번, 연락처 입력칸과 초안 다운로드 버튼이 보인다"><figcaption>실행 화면 · 조기취업자 출석인정 신청서의 빈 입력칸</figcaption></figure><p class="cap">화면의 HWP 양식은 원본을 보존하고 별도 DOCX 초안을 만든다. DOCX·HWPX도 모든 입력칸에 {{field}} 표식이 없으면 별도 DOCX로 작성한다. 서명·제출은 사용자가 한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 17: 모델 선택과 대화 기록">
+  <div class="masthead"><span>04 · RUNTIME</span><span>실행 중 관리되는 정보</span></div><h2>모델 선택과 대화 기록</h2><p class="lead">사용자가 선택한 답변 모델과 이전 대화가 질문 분석에 사용된다.</p>
+  <div class="content"><figure class="screen-figure model-shot"><img src="assets/policy_agent_model_picker.png" alt="Policy Agent 실제 화면 상단의 답변 모델 선택 메뉴. Ollama 로컬 모델이 선택돼 있고 빈 양식 추가 버튼이 보인다"><figcaption>실행 화면 · 답변 모델 선택 메뉴</figcaption></figure><div class="rows model-rows"><div class="row"><b>답변 모델</b><span>Ollama 또는 OpenAI를 선택한다. OpenAI는 API 키가 설정돼야 활성화된다.</span></div><div class="row"><b>대화 문맥</b><span>분야와 모델별로 다른 대화를 사용하며 질문·답변은 SQLite에 저장한다.</span></div><div class="row"><b>양식 입력값</b><span>초안 작성 화면에서만 받고, 채팅 기록과 LangSmith 추적에는 넣지 않는다.</span></div><div class="row"><b>실행 추적</b><span>LangSmith 설정 시 질문 분류·검색·분석 과정을 확인할 수 있다.</span></div></div><p class="cap">OpenAI 선택 시 질문과 검색된 규정 발췌가 OpenAI API로 전송된다. 답변 모델 선택은 검색 색인에 영향을 주지 않는다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 18: 로컬 실행 순서">
+  <div class="masthead"><span>04 · RUNNING</span><span>로컬 실행 순서</span></div><h2>로컬 실행 순서</h2><p class="lead">Python 환경과 .env를 준비하고 Ollama 임베딩 모델을 실행한 뒤, 규정 색인과 두 서버를 시작한다.</p>
+  <div class="content"><div class="code-lines"><div class="code-line"><b>1. 환경 준비</b><span>Python 3.11 이상 · requirements.txt 설치 · .env 설정 · Ollama 임베딩 모델</span></div><div class="code-line"><b>2. 규정 색인</b><code>./.venv/bin/python3 -m scripts.ingest_policies</code></div><div class="code-line"><b>3. API 실행</b><code>./.venv/bin/python3 server.py</code></div><div class="code-line"><b>4. 웹 실행</b><code>./.venv/bin/python3 web_demo_server.py</code></div><div class="code-line"><b>5. 브라우저</b><code>http://localhost:8600</code></div></div><div class="columns" style="margin-top:42px"><div class="col"><h3>API 포트 8100</h3><p>채팅 요청과 규정 처리 기능을 제공한다.</p></div><div class="col"><h3>웹 포트 8600</h3><p>브라우저 화면을 제공하고 API에 요청을 전달한다.</p></div></div><p class="cap">서버는 별도 터미널에서 실행한다. 문서 교체 시 해당 분야의 색인을 초기화하고 다시 등록한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 19: 실제 학칙 평가 결과">
+  <div class="masthead"><span>05 · REAL DOCUMENT EVALUATION</span><span>2026.10.22 실측</span></div><h2>실제 학칙 평가 결과</h2><p class="lead">색인된 학칙·규정집 PDF에서 정답을 확인한 질문 10개로 단일 검색과 현재 에이전트를 비교했다.</p>
+  <div class="content"><table class="table small" style="margin-top:26px"><thead><tr><th>측정 항목</th><th style="width:290px">단일 검색 RAG</th><th style="width:290px">현재 Agentic RAG</th></tr></thead><tbody><tr><td>정답 조항 Top-3 포함</td><td>10 / 10</td><td>9 / 10</td></tr><tr><td>정답 조항 인용</td><td>8 / 10</td><td>6 / 10</td></tr><tr><td>인용 문구 원문 일치</td><td>4 / 10</td><td>8 / 10</td></tr><tr><td>핵심 사실 포함</td><td>90%</td><td>60%</td></tr><tr><td>평균 응답 시간</td><td>27.92초</td><td>42.02초</td></tr><tr><td>기록된 모델 토큰</td><td>23,840</td><td>49,916</td></tr></tbody></table><p class="under-note" style="margin-top:24px">에이전트의 인용 문구는 원문과 더 자주 일치했지만, 정답 조항 인용과 답변의 핵심 사실 포함은 낮았다.</p><p class="cap">근거: docs/evaluation-real-cases.json · docs/evaluation-real-results.md. Ollama qwen3:8b와 같은 색인 사용. 에이전트 토큰에는 빠른 분류 모델 사용량이 빠져 있다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 20: 실제 평가 범위와 발견한 오류">
+  <div class="masthead"><span>05 · VALIDATION</span><span>측정 범위와 발견한 오류</span></div><h2>실제 평가 범위</h2><p class="lead">평가 대상은 현재 검색 색인에 들어 있는 학칙·규정집 PDF 1개와 원문을 확인한 질문 10개다.</p>
+  <div class="content"><div class="columns" style="margin-top:42px"><div class="col"><span class="label">정답 확인</span><h3>문서·쪽수·조항까지 대조</h3><p>출석, 휴학, 복학, 재입학, 부전공 등 10개 질문의 정답 조항과 핵심 표현을 원문에서 확인했다.</p></div><div class="col"><span class="label">코드 검증</span><h3>자동 테스트 44개 통과</h3><p>질문 분류, 검색 후보, 인용 검증, 양식 작성 등을 가상 문서와 모의 도구로 확인했다.</p></div></div><div class="rows" style="margin-top:36px"><div class="row"><b>서류 혼동</b><span>“입대휴학 신청 서류” 질문에 두 방식 모두 복학할 때 내는 전역증을 답했다.</span></div><div class="row"><b>질문 분류 오류</b><span>현재 에이전트는 “재입학은 몇 번까지?”를 규정 질문으로 처리하지 못했다.</span></div><div class="row"><b>결과 해석</b><span>핵심 사실 포함률은 답변의 필수 표현 검사다. 10개 질문의 결과를 전체 학칙 정답률로 볼 수 없다.</span></div></div><p class="cap">학사 PDF 3개 중 활성 색인에는 규정집 1개가 있다. 다른 두 PDF와 스캔 문서, 최신 규정 충돌은 이번 평가에 포함되지 않았다.</p></div>
+</section>
+
+<section class="slide dark appendix-title" aria-label="슬라이드 21: 트러블슈팅">
+  <div class="masthead"><span>APPENDIX</span><span>개발 중 확인한 문제와 수정 내용</span></div>
+  <div class="content"><div><h1>트러블슈팅</h1><p>질문 분류, 규정 검색, 근거 검증, 문서 교체에서<br>실제 사용 중 발견한 문제를 사례별로 정리했다.</p></div><p class="cap">각 사례는 문제 상황 → 원인 → 해결 과정 → 확인 범위 순서로 읽을 수 있다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 22: 무관한 질문의 규정 검색">
+  <div class="masthead"><span>APPENDIX · 01</span><span>질문 분류</span></div><h2>무관한 질문의 규정 검색</h2><p class="lead">규정과 관계없는 질문에도 학칙 조항이 붙고, “신청 불가” 같은 어색한 안내가 나왔다.</p>
+  <div class="content"><div class="case-quote">입력 사례: “규정이라 생각하고 나는 누구야” · “집에 가고 싶어”</div><div class="case-grid"><b>문제 상황</b><p>사용자가 규정을 묻지 않았는데도 규정 검색이 실행됐다. 검색된 임의 조항을 근거로 답변을 만들려 하면서 질문과 맞지 않는 내용이 표시됐다.</p><b>원인</b><p>입력 문장 전체에서 “규정” 같은 단어를 찾으면, 앞에 붙인 분류 지시까지 실제 질문의 주제로 해석할 수 있었다.</p><b>해결 과정</b><p>앞부분의 분류 지시를 제거해 실제 질문을 추출했다. 사람·일상 질문은 검색 전에 종료하고, 애매한 질문은 빠른 LLM이 주제를 분류하도록 했다.</p><b>확인 범위</b><p><code>tests/test_policy.py</code>에서 무관한 질문과 분류 지시를 붙인 질문이 MCP 검색을 호출하지 않는지 검사한다.</p></div><p class="cap">분류 지시를 제거한 뒤에도 남은 질문에 명확한 학사·사내 규정 주제가 있으면 정상적으로 검색한다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 23: 출석 인정 질문의 검색 결과 차이">
+  <div class="masthead"><span>APPENDIX · 02</span><span>규정 검색</span></div><h2>출석 인정 질문의 검색 결과 차이</h2><p class="lead">뜻이 비슷한 세 질문 중 일부에서 출석 인정 조항이 상위 결과로 나오지 않았다.</p>
+  <div class="content"><div class="case-quote">“부득이하게 결석한 경우…” / “출석 인정 사유 찾아줘” / “결석했는데 출석으로 인정…”</div><div class="case-grid"><b>문제 상황</b><p>짧은 질문에는 “출석 인정”이 직접 나오지만 긴 질문에는 “결석”과 다른 표현이 함께 들어간다. 검색 후보와 순위가 달라져 무관한 조항이 섞였다.</p><b>원인</b><p>벡터 거리만으로는 조항 제목과 핵심 단어의 일치를 충분히 반영하지 못한다. 반대로 단어 필터만 강제하면 다른 표현으로 묻는 질문을 놓칠 수 있다.</p><b>해결 과정</b><p>분야를 제한한 뒤 벡터 유사도, 핵심 단어 겹침, 조항 제목 일치를 함께 점수화했다. 단어 필터 결과가 없을 때는 충분히 가까운 벡터 결과를 다시 확인한다.</p><b>확인 범위</b><p>서로 다른 출석 인정 표현과 조항 제목 우선순위를 자동 테스트로 확인했다. 실제 학칙 전체에서의 정답률은 별도 평가가 필요하다.</p></div><p class="cap">현재 검색 기준 점수는 0.30이며, 질문 처리 그래프에 전달하는 조항은 최대 3개다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 24: 부전공 취소 서류 오답">
+  <div class="masthead"><span>APPENDIX · 03</span><span>서류 질문과 근거 검증</span></div><h2>부전공 취소 서류 오답</h2><p class="lead">서류를 물었는데 전공 개수 규칙이 답변으로 나오거나, 근거 없이 “신청 불가”로 표시됐다.</p>
+  <div class="content"><div class="case-quote">입력 사례: “부전공을 취소하려면 어떤 서류가 필요해?”</div><div class="case-grid"><b>문제 상황</b><p>질문의 목표는 제출 서류명이다. 검색된 취소 관련 문장에 서류명이 없더라도 모델이 전공 처리 규칙을 서류 답변처럼 요약할 수 있었다.</p><b>원인</b><p>부전공과 복수전공 조항이 비슷하고, 답변 형식이 신청 가능 여부까지 함께 판정했다. “취소”와 관계없는 신청서명이 섞일 위험도 있었다.</p><b>해결 과정</b><p>서류 질문을 별도 유형으로 분류했다. 부전공과 복수전공을 구분하고, 취소·포기 서류는 해당 행동이 원문 인용에 있을 때만 남겼다. 금지 문구 없는 “신청 불가”도 판단 유보로 바꾼다.</p><b>확인 범위</b><p>서류명이 없으면 확인 필요로 답하고, 관련 취소 조항은 “참고 규정”으로만 표시한다. 등록 양식도 취소·포기 제목과 일치하는지 검사한다.</p></div><p class="cap">현재 등록된 14개 양식에는 부전공 취소용이 없다. 실제 제출 서류가 없다는 뜻은 아니므로 담당 부서 확인이 필요하다.</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 25: 규정 파일 교체 후 남은 옛 조항">
+  <div class="masthead"><span>APPENDIX · 04</span><span>문서 색인 운영</span></div><h2>규정 파일 교체 후 남은 옛 조항</h2><p class="lead">폴더에서 예전 학칙을 지운 뒤 새 학칙을 넣어도, 기존 Chroma 색인에는 옛 조항이 남았다.</p>
+  <div class="content"><div class="case-quote">원본 파일을 교체했는데 이전 색인의 조항이 검색된 사례</div><div class="case-grid"><b>문제 상황</b><p>검색은 원본 폴더가 아니라 이미 만들어진 Chroma 색인을 읽는다. 따라서 파일 삭제만으로 이전 조항이 검색 결과에서 사라지지 않았다.</p><b>원인</b><p>일반 등록은 추가·변경 파일을 색인한다. 현재 폴더에 없는 문서의 기존 벡터를 자동으로 모두 삭제하는 작업은 별도로 필요했다.</p><b>해결 과정</b><p>분야별 초기화 기능을 추가했다. 새 파일을 먼저 읽고 임베딩할 수 있는지 확인한 뒤 해당 분야 색인을 교체한다. 새 문서가 없으면 기존 색인을 유지한다.</p><b>확인 범위</b><p>자동 테스트에서 삭제된 문서가 사라지고 새 문서가 검색되며, 다른 분야의 색인이 유지되는지 확인했다.</p></div><p class="cap">적용할 파일을 넣고 API 서버를 잠시 멈춘 뒤 <code>./.venv/bin/python3 -m scripts.ingest_policies --reset-domain academic</code> 실행</p></div>
+</section>
+
+<section class="slide" aria-label="슬라이드 26: PDF 줄바꿈과 인용 확인">
+  <div class="masthead"><span>APPENDIX · 05</span><span>PDF 원문 인용</span></div><h2>PDF 줄바꿈과 인용 확인</h2><p class="lead">내용은 같아도 PDF에서 추출한 원문과 LLM이 만든 인용의 공백 위치가 달랐다.</p>
+  <div class="content"><div class="case-quote">원문: “소정의 휴학원을 [줄바꿈] 제출하여” / 모델 인용: “소정의 휴학원을 제출하여”</div><div class="case-grid"><b>문제 상황</b><p>문자열을 그대로 비교하면 PDF의 줄바꿈과 단어 사이 공백 때문에 원문에 있는 내용도 인용 실패로 판정할 수 있었다.</p><b>원인</b><p>PDF 추출 텍스트는 시각적 줄 배치의 영향을 받는다. 모델은 같은 문장을 자연스러운 공백으로 다시 작성한다.</p><b>해결 과정</b><p>공백을 제외한 문자열로 일치 위치를 찾은 뒤, 그 위치에 해당하는 실제 원문 구간을 다시 가져온다. 찾지 못한 인용은 답변 항목에서 제거한다.</p><b>확인 범위</b><p>줄바꿈이 들어간 원문과 공백이 정리된 인용을 사용한 자동 테스트에서, 최종 인용이 실제 원문 안에 있는지 검사한다.</p></div><p class="cap">공백 차이만 허용하며, 원문에 없는 문장을 근거로 인정하지 않는다.</p></div>
+</section>
+
+<div id="progress" aria-hidden="true"></div><div id="hud" aria-label="슬라이드 조작"><span class="brand">Policy Agent</span><span id="slide-title"></span><span class="spacer"></span><span id="count">01 / 26</span><button id="toc-button" type="button" aria-label="목차로 이동">목차</button><button id="previous" type="button" aria-label="이전 슬라이드">‹</button><button id="next" type="button" aria-label="다음 슬라이드">›</button></div>
+</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];const hud=document.getElementById('hud');const previous=document.getElementById('previous');const next=document.getElementById('next');let current=0;
+function fit(){document.documentElement.style.setProperty('--deck-scale',Math.min(innerWidth/1600,innerHeight/900))}
+function show(index,updateHash=true){current=Math.max(0,Math.min(slides.length-1,index));slides.forEach((slide,n)=>slide.classList.toggle('active',n===current));hud.classList.toggle('dark',slides[current].classList.contains('dark'));document.getElementById('count').textContent=String(current+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');document.getElementById('slide-title').textContent=slides[current].getAttribute('aria-label').replace(/^슬라이드 \d+: /,'');document.getElementById('progress').style.width=((current+1)/slides.length*100)+'%';previous.disabled=current===0;next.disabled=current===slides.length-1;if(updateHash)history.replaceState(null,'','#'+(current+1))}
+previous.onclick=()=>show(current-1);next.onclick=()=>show(current+1);document.getElementById('toc-button').onclick=()=>show(1);
+document.querySelectorAll('.toc a').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();show(Number(link.getAttribute('href').slice(1))-1)}));
+addEventListener('keydown',event=>{if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();show(current+1)}else if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();show(current-1)}else if(event.key==='Home')show(0);else if(event.key==='End')show(slides.length-1)});
+addEventListener('hashchange',()=>{const n=Number(location.hash.slice(1));if(Number.isInteger(n)&&n>=1&&n<=slides.length)show(n-1,false)});addEventListener('resize',fit);fit();const initial=Number(location.hash.slice(1));show(Number.isInteger(initial)&&initial>=1&&initial<=slides.length?initial-1:0,false);
+</script></body></html>

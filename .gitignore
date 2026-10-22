@@ -15,4 +15,8 @@ data/policies/corporate/*
 *.pdf
 *.html
 docs/*
+!docs/Policy_Agent_발표자료.html
+!docs/evaluation-real-cases.json
+!docs/evaluation-real-results.csv
+!docs/evaluation-real-results.md
 .DS_Store

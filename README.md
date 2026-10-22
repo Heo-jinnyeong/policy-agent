@@ -92,7 +92,7 @@ curl -s -X POST http://127.0.0.1:8100/chat \
 
 ```bash
 ./.venv/bin/python3 -m pytest -q
-./.venv/bin/python3 -m scripts.evaluate --cases path/to/real_reference_cases.json
+LANGCHAIN_TRACING_V2=false ./.venv/bin/python3 -m scripts.evaluate_real
 ```
 
-평가에는 실제 등록 문서에서 검증한 질문·기대 조항·기대 판단이 10개 이상 필요합니다. `tests/fixtures/cases.json`은 가상 문서용 예시입니다. 평가 실행 시 API 서버와 로컬 평가 프로세스가 같은 Chroma DB 및 LLM 설정을 사용해야 합니다. 결과는 기본적으로 `docs/evaluation-results.csv`와 `.md`에 기록됩니다. 자세한 구조는 [architecture.md](docs/architecture.md), 평가 범위는 [evaluation.md](docs/evaluation.md)를 참고하세요.
+실제 학칙 평가 정답표는 `docs/evaluation-real-cases.json`입니다. 먼저 정답표에 기록된 학칙·규정집 PDF를 로컬에서 색인해야 합니다. 평가 명령은 동일한 Chroma 색인과 Ollama 모델을 사용해 단일 검색 RAG와 현재 LangGraph를 차례로 실행하고, 결과를 `docs/evaluation-real-results.csv`와 `.md`에 기록합니다. `tests/fixtures/cases.json`은 가상 문서용 개발 예시입니다. 자세한 구조는 [architecture.md](docs/architecture.md), 측정 조건과 해석 범위는 [evaluation.md](docs/evaluation.md)를 참고하세요.

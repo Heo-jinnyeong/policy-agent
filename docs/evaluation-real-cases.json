@@ -1,0 +1,62 @@
+[
+  {
+    "question": "조기취업 때문에 결석하면 출석으로 인정받을 수 있나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 378, "article": "제22조의3 (출석인정)"},
+    "answer_checks": [["조기취업"], ["증빙서류", "증빙"]]
+  },
+  {
+    "question": "가사 사유로 일반휴학을 신청할 때 별도 서류가 필요한가요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 381, "article": "제35조 (일반휴학)"},
+    "answer_checks": [["별도 서류 없음", "별도서류없음", "별도 서류가 필요하지", "서류가 필요하지"]]
+  },
+  {
+    "question": "입대휴학을 신청할 때 어떤 서류를 제출해야 하나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 381, "article": "제36조 (입대휴학)"},
+    "answer_checks": [["입영통지서", "소집통지서"], ["입대휴학원"]]
+  },
+  {
+    "question": "입대휴학 후 복학할 때 어떤 증명서를 제출해야 하나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 382, "article": "제37조 (복학)"},
+    "answer_checks": [["전역증", "기본증명서"]]
+  },
+  {
+    "question": "학사경고는 학기 평량평균이 몇 점 미만이면 받나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 335, "article": "제48조 (학사경고)"},
+    "answer_checks": [["1.75"]]
+  },
+  {
+    "question": "재입학은 몇 번까지 허용되나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 329, "article": "제21조 (재입학)"},
+    "answer_checks": [["1회", "한 번", "한번"]]
+  },
+  {
+    "question": "부전공을 이수하려면 부전공과목을 몇 학점 이상 들어야 하나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 380, "article": "제34조 (부전공)"},
+    "answer_checks": [["21학점"]]
+  },
+  {
+    "question": "의학과를 부전공으로 선택할 수 있나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 392, "article": "제2조 (부전공학과 또는 전공의 범위)"},
+    "answer_checks": [["의학과"], ["허용하지", "허용되지", "불가", "선택할 수 없"]]
+  },
+  {
+    "question": "휴학생은 개강 전후 언제 복학할 수 있나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 330, "article": "제32조 (복학의 시기)"},
+    "answer_checks": [["개강전3주", "개강 전 3주"], ["개강후1주", "개강 후 1주"]]
+  },
+  {
+    "question": "다른 학교에서 취득한 학점은 졸업학점의 몇 분의 몇까지 인정되나요?",
+    "domain": "academic",
+    "gold": {"document_id": "cd291275acef0cd39498", "page": 331, "article": "제37조의2 (학점인정범위)"},
+    "answer_checks": [["1/2", "절반"]]
+  }
+]
