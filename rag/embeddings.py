@@ -26,7 +26,7 @@ class OllamaEmbeddings(Embeddings):
 
 def create_embeddings():
     """Ollama local embeddings by default; Hugging Face is an optional fallback."""
-    backend = os.getenv("POLICY_EMBEDDING_BACKEND", "ollama" if os.getenv("LLM_BACKEND") == "ollama" else "huggingface")
+    backend = os.getenv("POLICY_EMBEDDING_BACKEND", "ollama")
     if backend == "ollama":
         return OllamaEmbeddings(os.getenv("POLICY_EMBEDDING_MODEL", "qwen3-embedding:0.6b"))
     from langchain_huggingface import HuggingFaceEmbeddings

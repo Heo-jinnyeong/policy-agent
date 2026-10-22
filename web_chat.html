@@ -4,29 +4,34 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Policy Agent</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#172335;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}#app{max-width:980px;margin:auto;min-height:100vh;display:flex;flex-direction:column}header{padding:26px 24px 16px;border-bottom:1px solid #dde3eb}h1{margin:0 0 5px;font-size:24px}header p{margin:0;color:#607084;font-size:13px}main{flex:1;padding:22px;display:flex;flex-direction:column;gap:16px}.welcome{background:white;border:1px solid #e0e7f0;border-radius:14px;padding:20px;color:#46586d}.row{display:flex}.row.user{justify-content:flex-end}.bubble{max-width:78%;padding:12px 15px;border-radius:14px;white-space:pre-wrap;line-height:1.55}.user .bubble{background:#2459ba;color:white}.agent .bubble{background:white;border:1px solid #dfe5ed}.progress,.result{background:white;border:1px solid #dfe5ed;border-radius:14px;padding:15px 18px;max-width:90%}.progress{color:#576b82;font-size:13px}.progress div{margin:5px 0}.progress div:before{content:"✓ ";color:#1b8c60}.result h2{font-size:16px;margin:0 0 12px}.badge{display:inline-block;background:#e8eefc;color:#244ba1;padding:5px 9px;border-radius:8px;font-weight:700}.result p{line-height:1.55}.result h3{font-size:13px;color:#53657a;margin:17px 0 7px}.result ul,.result ol{margin:0;padding-left:20px;line-height:1.6}.source{background:#f7f9fc;border-radius:8px;padding:10px;margin:7px 0;font-size:12px}.source strong{display:block;margin-bottom:4px}.source details summary{cursor:pointer;color:#345aa0}.source pre{white-space:pre-wrap;font-family:inherit;line-height:1.45}form{position:sticky;bottom:0;background:#f5f7fb;border-top:1px solid #dde3eb;padding:14px 22px 20px;display:flex;gap:9px}select,input,button{border-radius:9px;font-size:14px}select,input{border:1px solid #cbd6e2;background:white;padding:11px}input{flex:1;min-width:0}button{border:0;background:#2459ba;color:white;padding:0 19px;cursor:pointer}button:disabled{opacity:.55;cursor:default}@media(max-width:650px){form{flex-wrap:wrap}select{width:100%}.bubble,.progress,.result{max-width:100%}}
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#172335;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}#app{max-width:980px;margin:auto;min-height:100vh;display:flex;flex-direction:column}header{padding:26px 24px 16px;border-bottom:1px solid #dde3eb}.header-row{display:flex;justify-content:space-between;align-items:center;gap:16px}.model-picker{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;white-space:nowrap}.model-picker select{min-width:170px}h1{margin:0 0 5px;font-size:24px}header p{margin:0;color:#607084;font-size:13px}main{flex:1;padding:22px;display:flex;flex-direction:column;gap:16px}.welcome{background:white;border:1px solid #e0e7f0;border-radius:14px;padding:20px;color:#46586d}.row{display:flex}.row.user{justify-content:flex-end}.bubble{max-width:78%;padding:12px 15px;border-radius:14px;white-space:pre-wrap;line-height:1.55}.user .bubble{background:#2459ba;color:white}.agent .bubble{background:white;border:1px solid #dfe5ed}.progress,.result{background:white;border:1px solid #dfe5ed;border-radius:14px;padding:15px 18px;max-width:90%}.progress{color:#576b82;font-size:13px}.progress div{margin:5px 0}.progress div:before{content:"✓ ";color:#1b8c60}.result h2{font-size:16px;margin:0 0 12px}.badge{display:inline-block;background:#e8eefc;color:#244ba1;padding:5px 9px;border-radius:8px;font-weight:700}.result p{line-height:1.55}.result h3{font-size:13px;color:#53657a;margin:17px 0 7px}.result ul,.result ol{margin:0;padding-left:20px;line-height:1.6}.source{background:#f7f9fc;border-radius:8px;padding:10px;margin:7px 0;font-size:12px}.source strong{display:block;margin-bottom:4px}.source details summary{cursor:pointer;color:#345aa0}.source pre{white-space:pre-wrap;font-family:inherit;line-height:1.45}form{position:sticky;bottom:0;background:#f5f7fb;border-top:1px solid #dde3eb;padding:14px 22px 20px;display:flex;gap:9px}select,input,button{border-radius:9px;font-size:14px}select,input{border:1px solid #cbd6e2;background:white;padding:11px}input{flex:1;min-width:0}button{border:0;background:#2459ba;color:white;padding:0 19px;cursor:pointer}button:disabled{opacity:.55;cursor:default}@media(max-width:650px){.header-row{align-items:stretch;flex-direction:column}.model-picker{justify-content:space-between}.model-picker select{width:auto}form{flex-wrap:wrap}form select{width:100%}.bubble,.progress,.result{max-width:100%}}
+.header-actions{display:flex;align-items:center;gap:10px}.upload-button{border:1px solid #b8c8df;border-radius:9px;background:white;padding:10px 12px;color:#2459ba;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}.upload-button input{display:none}.forms-panel,.draft-panel{background:white;border:1px solid #dfe5ed;border-radius:14px;padding:16px 18px}.forms-panel h2,.draft-panel h2{font-size:16px;margin:0 0 10px}.form-card{border-top:1px solid #e4eaf2;padding:11px 0;display:flex;justify-content:space-between;align-items:center;gap:12px}.form-card p,.draft-note{font-size:12px;color:#607084;margin:5px 0}.form-actions{display:flex;gap:8px;align-items:center}.form-actions a{font-size:13px;color:#2459ba}.form-actions button,.draft-actions button{padding:9px 12px}.draft-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.draft-fields label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600}.draft-fields input,.draft-fields textarea{width:100%;font:inherit;border:1px solid #cbd6e2;border-radius:8px;padding:10px}.draft-actions{display:flex;gap:8px;margin-top:14px}.draft-actions .secondary{background:#e8eef7;color:#274565}@media(max-width:650px){.header-actions{justify-content:space-between;flex-wrap:wrap}.draft-fields{grid-template-columns:1fr}.form-card{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body><div id="app">
-<header><h1>Policy Agent</h1><p>규정 근거를 찾아 신청 가능 여부와 절차를 안내합니다 · {{ backend }}</p></header>
+<header><div class="header-row"><div><h1>Policy Agent</h1><p>규정 근거를 찾아 신청 가능 여부와 절차를 안내합니다.</p></div><div class="header-actions"><label class="model-picker">답변 모델 <select v-model="backend" :disabled="sending" aria-label="답변 모델"><option value="ollama">Ollama (로컬)</option><option value="openai" :disabled="!availableBackends.includes('openai')">{{ availableBackends.includes('openai') ? 'OpenAI (API)' : 'OpenAI (API 키 필요)' }}</option></select></label><label class="upload-button">{{ uploading ? '등록 중' : '빈 양식 추가' }}<input type="file" accept=".hwp,.hwpx,.docx" :disabled="uploading" @change="uploadForm"></label></div></div><p v-if="backend === 'openai'">질문과 검색된 규정 발췌가 OpenAI API로 전송됩니다.</p><p v-if="formMessage">{{ formMessage }}</p></header>
 <main ref="logEl">
-  <div v-if="!log.length" class="welcome">학사 규정을 선택하고 질문을 입력하세요. 실제 규정 문서가 등록되지 않았다면 판단을 유보합니다.</div>
+  <div v-if="!log.length" class="welcome">규정에 관해 질문하거나 빈 신청서 양식을 등록하세요. 인적사항은 채팅 대신 아래의 초안 작성 화면에 입력합니다.</div>
+  <section v-if="catalogForms.length" class="forms-panel"><h2>등록된 신청서</h2><div v-for="form in catalogForms" :key="form.id" class="form-card"><div><strong>{{ form.title }}</strong><p>{{ form.format.toUpperCase() }} · {{ form.fills_original_layout ? '원본 서식에 입력' : '별도 DOCX 초안' }}</p></div><div class="form-actions"><a :href="`/forms/${form.id}/original`">원본 받기</a><button type="button" :disabled="!form.fields.length" @click="startDraft(form)">초안 작성</button></div></div></section>
   <template v-for="item in log" :key="item.id">
     <div v-if="item.kind==='user'" class="row user"><div class="bubble">{{ item.text }}</div></div>
     <div v-else-if="item.kind==='steps'" class="progress"><div v-for="(step,i) in item.steps" :key="i">{{ step }}</div></div>
     <div v-else-if="item.kind==='error'" class="row agent"><div class="bubble">{{ item.text }}</div></div>
     <div v-else-if="item.kind==='result'" class="result">
-      <h2>검증된 안내 <span class="badge">{{ statusLabel(item.analysis?.eligibility) }}</span></h2>
-      <p>{{ item.analysis?.reason || item.reply }}</p>
-      <template v-if="item.analysis?.conditions?.length"><h3>적용 조건</h3><ul><li v-for="(x,i) in item.analysis.conditions" :key="i">{{ x.text }}</li></ul></template>
+      <h2>{{ item.metadata?.route==='chat' ? '서비스 안내' : resultTitle(item.metadata?.question_type) }} <span v-if="item.metadata?.route!=='chat' && item.metadata?.question_type==='eligibility'" class="badge">{{ statusLabel(item.analysis?.eligibility) }}</span> <small>{{ item.metadata?.model }}</small></h2>
+      <p v-if="showReason(item)">{{ item.analysis?.reason || item.reply }}</p>
+      <template v-if="item.metadata?.question_type!=='documents' && item.analysis?.conditions?.length"><h3>적용 조건</h3><ul><li v-for="(x,i) in item.analysis.conditions" :key="i">{{ x.text }}</li></ul></template>
       <template v-if="item.analysis?.documents?.length"><h3>필요 서류</h3><ul><li v-for="(x,i) in item.analysis.documents" :key="i">{{ x.text }}</li></ul></template>
       <template v-if="item.analysis?.procedure?.length"><h3>신청 절차</h3><ol><li v-for="(x,i) in item.analysis.procedure" :key="i">{{ x.text }}</li></ol></template>
       <p v-if="item.analysis?.deadline?.text"><b>신청 기한:</b> {{ item.analysis.deadline.text }}</p>
       <p v-if="item.analysis?.department?.text"><b>담당 부서:</b> {{ item.analysis.department.text }}</p>
+      <p v-if="item.analysis?.related_context?.text"><b>참고 규정:</b> {{ item.analysis.related_context.text }}</p>
       <p v-if="item.analysis?.follow_up_question"><b>추가 확인:</b> {{ item.analysis.follow_up_question }}</p>
       <template v-if="item.sources?.length"><h3>검색된 규정</h3><div v-for="s in item.sources" :key="s.id" class="source"><strong>{{ s.document_name }} {{ s.article }} {{ s.page ? `${s.page}쪽` : '' }}</strong><details><summary>원문 발췌 보기</summary><pre>{{ s.text }}</pre></details></div></template>
+      <template v-if="item.forms?.length"><h3>관련 신청서</h3><div v-for="form in item.forms" :key="form.id" class="form-card"><div><strong>{{ form.title }}</strong><p>{{ form.format.toUpperCase() }} · {{ form.fills_original_layout ? '원본 서식에 입력' : '별도 DOCX 초안' }}</p></div><div class="form-actions"><a :href="`/forms/${form.id}/original`">원본 받기</a><button type="button" :disabled="!form.fields.length" @click="startDraft(form)">초안 작성</button></div></div></template>
     </div>
   </template>
+  <section v-if="draftForm" class="draft-panel"><h2>{{ draftForm.title }} 초안 작성</h2><p class="draft-note">입력값은 초안 생성 요청에만 사용하며 채팅 기록에 저장하지 않습니다. {{ draftForm.fills_original_layout ? '양식 사본의 표시된 칸을 채웁니다.' : '원본 서식을 보존하고 별도 DOCX 작성 초안을 만듭니다.' }}</p><div class="draft-fields"><label v-for="field in draftForm.fields" :key="field.key">{{ field.label }}{{ field.required ? ' *' : '' }}<textarea v-if="field.multiline" v-model="draftValues[field.key]" rows="3" autocomplete="off"></textarea><input v-else v-model="draftValues[field.key]" autocomplete="off"></label></div><div class="draft-actions"><button type="button" :disabled="downloading" @click="downloadDraft">{{ downloading ? '작성 중' : '초안 다운로드' }}</button><button type="button" class="secondary" @click="closeDraft">취소</button></div><p v-if="draftError" class="draft-note">{{ draftError }}</p></section>
 </main>
 <form @submit.prevent="send"><select v-model="domain" :disabled="sending" aria-label="규정 분야"><option value="academic">학사 규정</option><option value="corporate">사내 규정</option></select><input v-model="input" placeholder="예: 부전공을 취소하려면 어떤 서류가 필요한가요?" aria-label="질문"><button :disabled="sending || !input.trim()">{{ sending ? '확인 중' : '질문하기' }}</button></form>
 </div>
@@ -34,17 +39,41 @@
 <script>
 const {createApp,ref,reactive,nextTick,watch}=Vue;
 const labels={eligible:'신청 가능',conditional:'조건부 가능',ineligible:'신청 불가',need_more_information:'추가 확인 필요'};
-const stages={RouteDecided:'질문 유형 분석 중',ContextAnalyzed:'사용자 조건 분석 중',PlanCreated:'검색 계획 수립',ResearchCompleted:'관련 규정 검색 중',ReplanCheck:'검색 근거 확인 중',PolicyAnalyzed:'신청 조건 검토 중',MissingInformation:'추가 정보 확인 중',DraftWritten:'답변 작성 중',Validation:'답변 검증 중',Finalize:'최종 결과 생성 완료'};
+const stages={RouteDecided:'질문 유형 분석 중',ContextAnalyzed:'사용자 조건 분석 중',PlanCreated:'검색 계획 수립',ResearchCompleted:'관련 규정 검색 중',ReplanCheck:'검색 근거 확인 중',PolicyAnalyzed:'신청 조건 검토 중',MissingInformation:'추가 정보 확인 중',DraftWritten:'답변 작성 중',Validation:'답변 검증 중',FormsSearched:'관련 신청서 검색 중',Finalize:'최종 결과 생성 완료'};
 createApp({setup(){
-  const log=ref([]),input=ref(''),domain=ref('academic'),sending=ref(false),backend=ref(''),logEl=ref(null);
-  watch(domain,()=>{log.value=[]});
-  function threadFor(selected){const key='policy-thread-'+selected;let thread=localStorage.getItem(key);if(!thread){thread='policy-'+crypto.randomUUID();localStorage.setItem(key,thread)}return thread}
+  const log=ref([]),input=ref(''),domain=ref('academic'),sending=ref(false),backend=ref('ollama'),availableBackends=ref(['ollama']),logEl=ref(null);
+  const catalogForms=ref([]),draftForm=ref(null),draftValues=ref({}),draftError=ref(''),uploading=ref(false),downloading=ref(false),formMessage=ref('');
+  watch([domain,backend],()=>{log.value=[]});
+  watch(domain,()=>{closeDraft();loadForms()});
+  function threadFor(selectedDomain,selectedBackend){const key='policy-thread-'+selectedDomain+'-'+selectedBackend;let thread=localStorage.getItem(key);if(!thread){thread='policy-'+crypto.randomUUID();localStorage.setItem(key,thread)}return thread}
   let id=0;
-  fetch('/health').then(r=>r.json()).then(h=>backend.value=h.llm_backend).catch(()=>{});
+  fetch('/health').then(r=>r.json()).then(h=>{availableBackends.value=Object.keys(h.backends||{ollama:{}}).filter(x=>x==='ollama'||x==='openai');backend.value=availableBackends.value.includes(h.llm_backend)?h.llm_backend:'ollama'}).catch(()=>{});
+  async function loadForms(){try{const response=await fetch('/forms?domain='+encodeURIComponent(domain.value));if(!response.ok)throw new Error('양식 목록을 불러오지 못했습니다.');catalogForms.value=(await response.json()).forms||[]}catch(error){formMessage.value=error.message}}
+  loadForms();
+  async function uploadForm(event){const file=event.target.files?.[0];event.target.value='';if(!file)return;
+    if(!/\.(hwp|hwpx|docx)$/i.test(file.name)){formMessage.value='HWP, HWPX, DOCX 파일만 등록할 수 있습니다.';return}
+    if(file.size>10*1024*1024){formMessage.value='양식은 10MB 이하만 등록할 수 있습니다.';return}
+    uploading.value=true;formMessage.value='';
+    try{const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.readAsDataURL(file)});
+      const response=await fetch('/forms/upload',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({filename:file.name,domain:domain.value,content_base64:String(dataUrl).split(',')[1]})});
+      const result=await response.json();if(!response.ok)throw new Error(result.detail||'양식을 등록하지 못했습니다.');
+      formMessage.value=result.form.fields.length?`${result.form.title} 양식을 등록했습니다.`:`${result.form.title} 양식을 등록했습니다. 입력칸을 찾지 못해 .form.json 설정이 필요합니다.`;await loadForms();
+    }catch(error){formMessage.value=error.message}finally{uploading.value=false}
+  }
+  function startDraft(form){draftForm.value=form;draftValues.value={};draftError.value='';scroll()}
+  function closeDraft(){draftValues.value={};draftForm.value=null;draftError.value=''}
+  async function downloadDraft(){const form=draftForm.value;if(!form||downloading.value)return;
+    downloading.value=true;draftError.value='';
+    try{const response=await fetch('/forms/'+encodeURIComponent(form.id)+'/draft',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({values:draftValues.value})});
+      if(!response.ok){let message='초안을 만들지 못했습니다.';try{message=(await response.json()).detail||message}catch{}throw new Error(message)}
+      const blob=await response.blob();const extension=response.headers.get('content-disposition')?.match(/application-draft\.(hwpx|docx)/)?.[1]||'docx';
+      const url=URL.createObjectURL(blob);const anchor=document.createElement('a');anchor.href=url;anchor.download=form.title.replace(/[\\/:*?"<>|]/g,'_')+'-초안.'+extension;document.body.appendChild(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);closeDraft();
+    }catch(error){draftError.value=error.message}finally{downloading.value=false}
+  }
   async function scroll(){await nextTick();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
   function send(){const message=input.value.trim();if(!message||sending.value)return;input.value='';sending.value=true;
     log.value.push({id:id++,kind:'user',text:message});const steps=reactive({id:id++,kind:'steps',steps:[]});log.value.push(steps);scroll();
-    const es=new EventSource(`/chat/stream?message=${encodeURIComponent(message)}&thread_id=${encodeURIComponent(threadFor(domain.value))}&domain=${encodeURIComponent(domain.value)}`);
+    const es=new EventSource(`/chat/stream?message=${encodeURIComponent(message)}&thread_id=${encodeURIComponent(threadFor(domain.value,backend.value))}&domain=${encodeURIComponent(domain.value)}&llm_backend=${encodeURIComponent(backend.value)}`);
     let complete=false;
     es.onmessage=ev=>{if(ev.data==='[DONE]'){es.close();sending.value=false;return;}let data;try{data=JSON.parse(ev.data)}catch{return}
       if(data.type==='FinalAnswer'){complete=true;log.value.push({id:id++,kind:'result',...data});scroll();return}
@@ -53,6 +82,8 @@ createApp({setup(){
     };
     es.onerror=()=>{es.close();sending.value=false;if(!complete)log.value.push({id:id++,kind:'error',text:'연결이 끊어졌습니다. 다시 시도해 주세요.'})};
   }
-  return {log,input,domain,sending,backend,logEl,send,statusLabel:s=>labels[s]||'확인 필요'};
+  const resultTitle=type=>({documents:'필요 서류 안내',procedure:'신청 절차 안내',eligibility:'신청 가능 여부',explanation:'규정 안내'})[type]||'규정 안내';
+  const showReason=item=>item.metadata?.question_type==='eligibility'||(!item.analysis?.documents?.length && !item.analysis?.procedure?.length);
+  return {log,input,domain,sending,backend,availableBackends,logEl,send,catalogForms,draftForm,draftValues,draftError,uploading,downloading,formMessage,uploadForm,startDraft,closeDraft,downloadDraft,statusLabel:s=>labels[s]||'확인 필요',resultTitle,showReason};
 }}).mount('#app');
 </script></body></html>

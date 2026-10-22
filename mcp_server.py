@@ -2,6 +2,7 @@
 from fastmcp import FastMCP
 
 from rag.retriever import get_document, search_policies
+from application_forms.catalog import search_forms
 
 mcp = FastMCP(name="policy-agent")
 
@@ -10,6 +11,12 @@ mcp = FastMCP(name="policy-agent")
 def search_policy_documents(query: str, domain: str = "academic", top_k: int = 3) -> dict:
     """Search indexed regulations and return their text and provenance."""
     return {"results": search_policies(query, domain, top_k)}
+
+
+@mcp.tool()
+def search_application_forms(query: str, domain: str = "academic") -> dict:
+    """Find uploaded blank application forms without applicant information."""
+    return {"results": search_forms(query, domain)}
 
 
 @mcp.resource("policy://documents/{document_id}")

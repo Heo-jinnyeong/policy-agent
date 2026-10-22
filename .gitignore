@@ -4,7 +4,15 @@ session.db
 __pycache__/
 *.log
 data/chroma/
+data/forms/academic/*
+data/forms/corporate/*
+!data/forms/academic/.gitkeep
+!data/forms/corporate/.gitkeep
 data/policies/academic/*
 data/policies/corporate/*
 !data/policies/academic/.gitkeep
 !data/policies/corporate/.gitkeep
+*.pdf
+*.html
+docs/*
+.DS_Store

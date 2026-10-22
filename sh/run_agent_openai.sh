@@ -48,7 +48,7 @@ case "$CONFIRM" in
 esac
 
 # ── 1) 이전 실행 정리 ──────────────────────────────────────────────────
-if lsof -ti:8100 >/dev/null 2>&1; then
+if lsof -tiTCP:8100 -sTCP:LISTEN >/dev/null 2>&1; then
     echo "ERROR: 8100 포트가 이미 사용 중입니다. 기존 서버를 직접 종료한 뒤 재실행하세요."
     exit 1
 fi

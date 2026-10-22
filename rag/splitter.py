@@ -3,8 +3,8 @@ import re
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-ARTICLE = re.compile(r"(?=^\s*(?:제\s*\d+\s*조(?:\s*\([^\n)]*\))?|Article\s+\d+\b))", re.M | re.I)
-ARTICLE_NAME = re.compile(r"^\s*((?:제\s*\d+\s*조|Article\s+\d+)(?:\s*\([^\n)]*\))?)", re.I)
+ARTICLE = re.compile(r"(?=^\s*(?:제\s*\d+\s*조(?:의\s*\d+)?(?:\s*\([^\n)]*\))?|Article\s+\d+\b))", re.M | re.I)
+ARTICLE_NAME = re.compile(r"^\s*((?:제\s*\d+\s*조(?:의\s*\d+)?|Article\s+\d+)(?:\s*\([^\n)]*\))?)", re.I)
 
 
 def split_policy(pages: list[Document], chunk_size: int = 900) -> list[Document]:

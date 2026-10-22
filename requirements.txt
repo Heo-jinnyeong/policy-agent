@@ -12,4 +12,6 @@ pydantic>=2.0,<3
 langchain-chroma>=1.0,<2
 langchain-text-splitters>=1.0,<2
 pypdf>=5.0,<7
+python-docx>=1.1,<2
+olefile>=0.47,<1
 pytest>=8.0,<10
